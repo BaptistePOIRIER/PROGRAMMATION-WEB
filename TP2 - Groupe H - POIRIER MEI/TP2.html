@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta name="viewport" content="width=device-width">
+    <title>TP2 - Exercice 1</title>
+</head>
+<body>
+    <header>
+        <strong>TP2 - POIRIER MEI</strong>
+        <img src="logo-efrei-paris.jpg" class="image-en-tete">
+    </header>
+    <div class="stick">
+        <form class="formulaire stick">
+            <div class="ligne1">
+                <p>
+                    <input type="text" id="prenom" placeholder="Prénom" required>
+                  </p>
+                  <p>
+                    <input type="text" id="nom" placeholder="Nom" required>
+                  </p>
+                  <p>
+                    <input type="text" id="email" placeholder="Email" required>
+                  </p>
+                  <p>
+                      <select id="role">
+                          <option>Etudiant</option>
+                          <option>Enseignant</option>
+                      </select>
+                  </p>
+            </div> 
+            <br>
+            <p>
+                <button type="button" id="delay" class="bouton" onclick="ajouter()">Ajouter</button>
+            </p>
+            <p>
+                <button type="button" class="bouton" onclick="tout_supprimer()">Tout supprimer</button>
+            </p>
+        </form>
+    </div>
+    <br>
+    <main class="formulaire">
+        <table class="table">
+            <tr>
+                <th>Prénom</th>
+                <th>Nom</th>
+                <th>Email</th>
+                <th>Rôle</th>
+            </tr>
+        </table>
+    </main>
+    <style>
+        *{
+            padding: 0px;
+            margin: 0px;
+            background-color: lightgray;
+            box-sizing: border-box;
+            font-family: Verdana;
+        }
+        header{
+            width: 100%;
+            text-align: center;
+            padding: 20px;
+        }
+        img{
+            margin: 20px;
+        }
+        .image-en-tete{
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+            border-radius: 50%;
+            box-shadow: 8px 8px 20px black;
+        }
+        .formulaire{
+            width: 100%;
+            border: 1px solid black;
+            /* margin: 30px; En ajoutant cette marge, on remarque que tout le formulaire ce décale de 30px vers le bas droit : https://i.imgur.com/1kiaWWB.png */
+            /* box-sizing: border-box; En ajoutant ce style on remarque que le formulaire ce décale très légèrement vers la gauche */
+            background-color: white;
+            box-shadow: 3px 5px 10px black;
+            padding: 5px; /* Marge intérieure */
+            align-items: center;
+            margin-left: auto;
+            margin-right: auto;
+            max-width: 1000px; /* Largeur maximal 1000 px */
+            }
+        .formulaire p{
+            margin: 4px;
+            display: inline;
+        }
+        p input:valid {
+            border: none;
+            border-bottom: 1px solid gray;
+        }
+        p input:invalid {
+            border: none;
+            border-bottom: 1px solid red;
+            caret-color: red;
+        }
+        .formulaire *{
+            border-radius: 3px;
+            background-color: white;
+            outline: none;
+        }
+        .ligne1 {
+            display: flex;
+            flex-flow: row wrap;
+            align-items: center;
+            justify-content: space-around;
+        }
+        .bouton{
+            padding: 10px;
+            text-transform : uppercase;
+            border: none;
+            box-shadow: 3px 5px 10px black;
+            background-color: lightgray;
+        }
+        .bouton:hover{
+            background-color: gray;
+        }
+        main table{
+            display: inline;
+        }
+        .table{
+            width: 100%;
+            display: flex;
+            flex-flow: row wrap;
+            align-items: center;
+            justify-content: space-around;
+            padding: 10px;
+            border-collapse: collapse;
+            overflow-x: auto;
+        }
+        td {
+            border:2px solid black;
+            text-align: center;
+            height: 0;
+            width: 100px;
+            height: 30px;
+            padding: 10px;
+        }
+        .stick{
+            position: sticky;
+            top: 0;
+        }
+    </style>
+    <script>
+        console.log("Hello world!");
+
+        let bouton_autorisé = false
+        let delay = 10
+        affiche_delay()
+        setInterval(affiche_delay, 1000)
+
+        function affiche_delay() {
+            if (!bouton_autorisé) {
+                console.log(delay)
+                delay -= 1
+                document.querySelector('#delay').textContent = `Ajouter (attendre ${delay} s)`
+                document.querySelector('#delay').style.backgroundColor = 'darkred'
+                if (delay <= 0) {
+                    bouton_autorisé = true
+                    document.querySelector('#delay').textContent = `Ajouter`
+                    document.querySelector('#delay').style.backgroundColor = 'lightgray'
+                }
+            }
+        }
+
+        function ajouter() {
+            // console.log(document.querySelector('#prenom').value)
+            let table = document.querySelector('.table tbody')
+            // console.log(table)
+
+            // Création de la nouvelle ligne
+            let tr = document.createElement('tr');
+            let prenom = document.createElement('td')
+            prenom.textContent = document.querySelector('#prenom').value
+            let nom = document.createElement('td')
+            nom.textContent = document.querySelector('#nom').value
+            let email = document.createElement('td')
+            email.textContent = document.querySelector('#email').value
+            let role = document.createElement('td')
+            role.textContent = document.querySelector('#role').value
+            tr.appendChild(prenom)
+            tr.appendChild(nom)
+            tr.appendChild(email)
+            tr.appendChild(role)
+
+            // Vérification de la validité
+            if(document.querySelector('#prenom').reportValidity() && document.querySelector('#nom').reportValidity() && document.querySelector('#email').reportValidity()){
+                if (bouton_autorisé) {
+                    table.appendChild(tr)
+                    bouton_autorisé = false
+                    delay = 10
+                    affiche_delay()
+                }else {
+                    alert('Vous cliquez trop vite !')
+                }
+                
+            }
+
+            // Question 2 : On remarque que la console nous renvoi du code html
+        }
+
+        function tout_supprimer() {
+            // Suppresion du tableau précédent
+            document.querySelector('.table tbody').remove()
+
+            // Création du tableau de base
+            let table = document.querySelector('.table')
+            let tr = document.createElement('tr');
+            let tbody = document.createElement('tbody');
+            let prenom = document.createElement('th')
+            prenom.textContent = 'Prénom'
+            let nom = document.createElement('th')
+            nom.textContent = 'Nom'
+            let email = document.createElement('th')
+            email.textContent = 'Email'
+            let role = document.createElement('th')
+            role.textContent = 'Rôle'
+            tr.appendChild(prenom)
+            tr.appendChild(nom)
+            tr.appendChild(email)
+            tr.appendChild(role)
+            tbody.appendChild(tr)
+            table.appendChild(tbody)
+        }
+
+        //ajouter() // Fonctionne correctement
+        //var tr = document.createElement('tr');
+        //let td1 = document.createElement('td');
+        //td1.textContent = 'TEST1';
+        //let td2 = document.createElement('td');
+        //td2.textContent = 'TEST2';
+        //let td3 = document.createElement('td');
+        //td3.textContent = 'TEST3';
+        //let td4 = document.createElement('td');
+        //td4.textContent = 'TEST4';
+        //tr.appendChild(td1);
+        //tr.appendChild(td2);
+        //tr.appendChild(td3);
+        //tr.appendChild(td4);
+    </script>
+</body>
+</html>

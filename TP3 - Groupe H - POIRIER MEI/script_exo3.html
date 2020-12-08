@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Introduction vue.js</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+<body>
+    <div id="app">
+        <p>{{ currentFruit }}</p>
+        <ul>
+            <li v-for="fruit in fruits" v-on:click="changeCurrentFruit(fruit)" v-bind:style="[(fruit == currentFruit) ? {'font-weight': 'bold'} : {}]">
+                <span v-on:click="deleteFruit(fruit)">❌</span> {{ fruit }}
+            </li>
+        </ul>
+    </div>
+    <script>
+        var vm = new Vue({
+            el: "#app",
+            data: {
+                fruits: ['Pomme', 'Orange', 'Fraise', 'Melon', 'Cerise'],
+                currentFruit: 'Pomme'
+            },
+            methods: {
+                changeCurrentFruit(fruit) {
+                    this.currentFruit = fruit
+                },
+                deleteFruit(fruit){
+                    this.fruits.splice(this.fruits.indexOf(fruit),1)
+                }
+            }
+        })
+    </script>
+</body>
+</html>

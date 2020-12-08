@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Introduction vue.js</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+<body>
+    <div id="app">
+        <input v-model="nom" placeholder="Entrez un nouveau cours">
+        <button v-on:click="addCours(nom)">Ajouter</button>
+        <article>
+            <p v-for="cour in cours">{{ cour }}</p>
+        </article>
+        <select v-model="selected">
+            <option v-for="cour in cours">{{ cour }}</option>
+        </select>
+        <input v-model="newNom" placeholder="Entrez un nouveau nom">
+        <button v-on:click="editCours(selected,newNom)">Modifier</button>
+    </div>
+    <script>
+        var vm = new Vue({
+            el: "#app",
+            data: {
+                cours: ['Algorithmique', 'Structures de données', 'Programmation Web', 'Web Avancé', 'Frond-end Web Development', 'Asynchronous Event-Driven Programming with Node.js'],
+                nom: '',
+                selecte: '',
+                newNom: ''
+            },
+            methods: {
+                addCours(cour) {
+                    this.cours.push(cour)
+                },
+                editCours(cour,newNom){
+                    this.cours.splice(this.cours.indexOf(cour),1,newNom)
+                }
+            }
+        })
+    </script>
+</body>
+</html>

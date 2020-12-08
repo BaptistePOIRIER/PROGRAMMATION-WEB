@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <!-- Nom de la page (Exercice1) -->
+    <title>Mon titre</title> 
+</head>
+<body>
+    <!-- Exercice 2 -->
+    <div class="main_page">
+    <h1 class="bordure_similaire">TP 1</h1>
+    <p><strong>Lorem ipsum dolor sit amet</strong>, consectetur adipiscing elit. Aenean imperdiet placerat est ac condimentum. Nulla accumsan lectus a nibh scelerisque venenatis. In in efficitur justo.<br> Quisque vel nulla et nibh gravida egestas. Pellentesque lobortis interdum magna vel vulputate. Etiam facilisis vulputate pharetra. Cras eu massa urna.</p>
+    <h2 id="titre_second_niveau", class="bordure_similaire">Second titre</h2>
+    <p id="second_paragraphe">Second paragraphe</p>
+
+    <ol class="liste_films">
+        <li class="film">Interstellar</li>
+        <li class="film">Harry Potter</li>
+        <li class="film">Oblivion</li>
+      </ol>
+    
+    <a href="table.html">Page suivante</a>
+    </div>
+
+    <footer>
+        <h4>TP1 Programmation Web - POIRIER MEI</h4>
+        <a href="index.html">Page 1</a>
+        <a href="table.html">Page 2</a>
+    </footer>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+        p{
+            background-color: #e7e7e7;
+        }
+
+        #second_paragraphe{
+            border:2px solid red;
+        }
+
+        #titre_second_niveau {
+            text-shadow: gray 5px 5px 2px
+        }
+
+        .bordure_similaire {
+            border-bottom: 5px solid #32a1ce;
+        }
+        
+        .liste_films{
+            font-size: 16px;
+            font-family: Verdana, Geneva, Tahoma, sans-serif;
+            font-style: italic;
+            color: royalblue;
+            list-style-type: "➥ ";
+            display: block;
+            text-align: center;
+        }
+
+        li {
+            display: inline-block;
+            border:2px solid orange;
+            border-radius: 5px;
+        }
+
+        li:hover{
+            background-color: gray;
+            cursor: pointer;
+        }
+
+        .main_page {
+            position: relative;
+            min-height: 90vh;
+        }
+        
+        footer{
+            position: absolute;
+            width: 100%;
+            padding: 2.5vh;
+            background-color: teal;
+            color: white;
+            text-align: center;
+        }
+    </style>
+</body>
+</html>

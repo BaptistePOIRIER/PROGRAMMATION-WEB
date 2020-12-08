@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ToDo list</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+<body>
+    <header>
+        <img src="check.png" id="header_img">
+        <p id="header_title">ToDo list</p>
+    </header>
+    <div id="app">
+        <div id="form">
+            <input v-model="title" placeholder="Titre" id="title_input" required>
+            <textarea v-model="content" placeholder="Contenu" required></textarea>
+            <button v-on:click="submitNewTask(title,content)">Ajouter</button>
+        </div>
+        <div id="tasks">
+            <div v-for="task in tasks" class="task">
+                <h2>{{task.title}}</h2>
+                <br><br>
+                <p>{{task.content}}</p>
+                <br>
+                <input type="checkbox" id="checkbox" v-model="task.taskDone">
+                <label for="checkbox">{{ taskState(task) }}</label>
+            </div>
+        </div>
+    </div>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            font-family: Verdana;
+            background-color: #222629;
+        }
+        header{
+            padding: 5px;
+            margin: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: #474B4F;
+            border-radius: 25px;
+            border-bottom: 2px solid #86C232;
+        }
+        #header_title{
+            color: #86C232;
+            padding: 1%;
+            font-weight: bolder;
+            font-size: 400%;
+            background-color: #474B4F;
+        }
+        #header_img{
+            width: 100px;
+            background-color: #474B4F;
+        }
+        #form{
+            padding: 10px;
+            margin: 0px 10% 20px 10%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: #6B6E70;
+            border-radius: 10px;
+            border-bottom: 2px solid #86C232;
+            position: sticky;
+            top: 20px;
+        }
+        #form input{
+            margin: 0px 20px 0px 20px;
+            color: white;
+            font-size: 15px;
+            font-weight: bold;
+            width: 20%;
+            height: 50px;
+            border-radius: 8px;
+            background-color: #474B4F;
+            border-bottom: 2px solid #86C232;
+        }
+        #form input::placeholder{
+            color: #939ba3;
+            font-weight: normal;
+            text-align: center;
+        }
+        #form textarea{
+            margin: 0px 20px 0px 20px;
+            color: white;
+            font-size: 15px;
+            width: 50%;
+            height: 50px;
+            border-radius: 8px;
+            resize: vertical;
+            background-color: #474B4F;
+            border-bottom: 2px solid #86C232;
+        }
+        #form textarea::placeholder{
+            color: #939ba3;
+            font-weight: normal;
+            text-align: center;
+            line-height: 50px;
+        }
+        #form button{
+            margin: 0px 20px 0px 20px;
+            padding: 10px;
+            color: white;
+            font-size: 15px;
+            width: 10%;
+            border-radius: 20px;
+            background-color: #86C232;
+            transition: .2s;
+            border: 2px solid #61892F
+        }
+        #form button:hover{
+            background-color: #9bdf3c;
+            transition: .2s;
+        }
+        #tasks{
+            padding: 0px;
+            margin: 50px 3% 20px 3%;
+            display: flex;
+            flex-wrap: wrap;
+            align-content: space-between;
+            justify-content: center;
+            align-items: center;
+            border-radius: 10px;
+        }
+        .task{
+            width: 30%;
+            min-height: 120px;
+            margin: 20px;
+            border-radius: 10px;
+            border: 2px solid #86C232;
+            background-color: #61892F;
+            transition: .2s;
+        }
+        .task:hover{
+            background-color: #86C232;
+            transition: .2s;
+        }
+        .task:hover *{
+            background-color:#86C232;
+            transition: .2s;
+        }
+        .task *{
+            background-color: #61892F;
+            transition: .2s;
+        }
+        .task h2{
+            text-align: center;
+            color: white;
+        }
+        .task p{
+            text-align: center;
+        }
+        .task input{
+            width: 30;
+            height: 30px;
+            text-align:center;
+            vertical-align: middle;
+        }
+    </style>
+    <script>
+        var vm = new Vue({
+            el: "#app",
+            data: {
+                tasks: [
+                    {title: 'Apprendre vue.js', content: "Finir le TP 3 sur l'initiation à vue.js afin de créer des interfaces plus jolies et plus rapidement!", taskDone: false},
+                    {title: 'Apprendre vue.js', content: "Finir le TP 3 sur l'initiation à vue.js afin de créer des interfaces plus jolies et plus rapidement!", taskDone: true},
+                    {title: 'Apprendre vue.js', content: "Finir le TP 3 sur l'initiation à vue.js afin de créer des interfaces plus jolies et plus rapidement!", taskDone: false}
+                ]
+            },
+            methods: {
+                submitNewTask(title, content) {
+                    this.tasks.push({title: title, content: content, taskDone: false})
+                },
+                taskState(task) {
+                if (task.taskDone) {
+                        return 'Effectué'
+                    }
+                    return 'En cours...'
+                }
+            }
+        })
+    </script>
+</body>
+</html>

@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Introduction vue.js</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+<body>
+    <div id="app">
+        <button v-on:click="inverser">Changer la couleur</button>
+        <h1 v-if="isWhite" v-bind:style="{ color: 'white', 'background-color': 'black' }">Blanc</h1>
+        <h1 v-else v-bind:style="{ color: 'black', 'background-color': 'white' }">Noir</h1>
+        <h2>{{ myText }}</h2>
+    </div>
+    
+    <script>
+        var vm = new Vue({
+            el: "#app",
+            data: {
+                isWhite: false
+            },
+            methods: {
+                inverser() {
+                    this.isWhite = !this.isWhite
+                }            
+            },
+            computed: {
+                myText: function() {
+                    if (this.isWhite) {
+                        return 'Blanc'
+                    }
+                    return 'Noir'
+                }
+            }
+        })
+    </script>
+</body>
+</html>

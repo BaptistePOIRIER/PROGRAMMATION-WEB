@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Introduction vue.js</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+<body>
+    <div id="app">
+        Mon age est {{ age }}
+    </div>
+    <script>
+        var vm = new Vue({
+            el: "#app",
+            data: {
+                age: 20
+            }
+        })
+
+        setInterval(oneMore, 1000) // Intervale de temps pour ajouter 1 à l'age toutes les secondes (Question : 6)
+
+        // Fonction permettant l'ajout de 1 à la variable vue : age
+        function oneMore() {
+            vm.age ++
+        }
+
+        // Réponse Question 7 :
+        // Au lancement du script, le texte "Mon age est 20" est affiché. Puis toutes les secondes il est mis à jour automatiquement en incrémentant de 1.
+
+    </script>
+</body>
+</html>
